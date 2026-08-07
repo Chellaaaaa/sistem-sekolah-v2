@@ -52,23 +52,38 @@ class StudentController extends Controller
         return "Melakukan penambahan data siswa";
     }
     
-    public function show(string $id)
-    {
-        $title = "Sitem Sekolah - Detail Siswa";
 
-        return view('students.show', [
-            'title' => $title
-        ]);
-    }
+public function show(string $id)
+{
+    $title = "Sistem Sekolah - Detail Siswa";
 
-    public function edit(string $id)
-    {
-        $title = "Sitem Sekolah - Edit Siswa";
-        
-        return view('students.edit', [
-            'title' => $title
-        ]);
-    }
+    $student = [
+        'id' => $id,
+        'nis' => '2024001',
+        'name' => 'Budi Ariyanto',
+        'gender' => 'L',
+        'major' => 'AKL',
+        'class' => 'XII AKL 1',
+    ];
+
+    return view('students.show', compact('title', 'student'));
+}
+
+public function edit(string $id)
+{
+    $title = "Sistem Sekolah - Edit Siswa";
+
+    $student = [
+        'id' => $id,
+        'nis' => '2024001',
+        'name' => 'Budi Ariyanto',
+        'gender' => 'L',
+        'major' => 'AKL',
+        'class' => 'XII AKL 1',
+    ];
+
+    return view('students.edit', compact('title', 'student'));
+}
 
     public function update(Request $request, string $id)
     {

@@ -7,11 +7,45 @@ use Illuminate\Http\Request;
 
 class EditController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request, string $id)
-    {
-        return "Displaying school class edit form with ID: {$id}";
-    }
+   public function __invoke(Request $request, string $id)
+{
+    $title = 'Sistem Sekolah - Edit Kelas';
+
+    $classes = [
+        [
+            'id' => 1,
+            'name' => 'XII AKL 1',
+            'grade' => 'XII',
+            'major' => 'AKL',
+            'homeroom_teacher' => 'Budi Santoso',
+        ],
+        [
+            'id' => 2,
+            'name' => 'XII TKJ 1',
+            'grade' => 'XII',
+            'major' => 'TKJ',
+            'homeroom_teacher' => 'Siti Aminah',
+        ],
+    ];
+
+    $class = collect($classes)->firstWhere('id', (int) $id);
+
+    $majors = [
+        ['id' => 1, 'name' => 'AKL'],
+        ['id' => 2, 'name' => 'TKJ'],
+        ['id' => 3, 'name' => 'BD'],
+    ];
+
+    $teachers = [
+        ['id' => 1, 'name' => 'Budi Santoso'],
+        ['id' => 2, 'name' => 'Siti Aminah'],
+    ];
+
+    return view('classes.edit', compact(
+        'title',
+        'class',
+        'majors',
+        'teachers'
+    ));
+}
 }
