@@ -6,21 +6,23 @@
 
 <div class="mb-8 border-b border-[#E5E3DB] pb-5">
 
-    <a href="{{ route('classes.index') }}"
-        class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">
-        &larr; Daftar Kelas
-    </a>
+```
+<a href="{{ route('classes.index') }}"
+    class="text-xs uppercase tracking-[0.15em] text-slate-400 hover:text-[#A16207]">
+    &larr; Daftar Kelas
+</a>
 
-    <h1 class="mt-2 font-display text-3xl font-semibold text-[#16213A]">
-        Ubah Kelas
-    </h1>
+<h1 class="mt-2 font-display text-3xl font-semibold text-[#16213A]">
+    Ubah Kelas
+</h1>
 
-    <p class="mt-1 text-sm text-slate-500">
-        Memperbarui data kelas
-        <span class="font-medium text-[#16213A]">
-            {{ $class['name'] }}
-        </span>.
-    </p>
+<p class="mt-1 text-sm text-slate-500">
+    Memperbarui data kelas
+    <span class="font-medium text-[#16213A]">
+        {{ $class['name'] }}
+    </span>.
+</p>
+```
 
 </div>
 
@@ -28,98 +30,121 @@
       method="POST"
       class="space-y-6 border border-[#E5E3DB] bg-white p-8">
 
-    @csrf
-    @method('PUT')
+```
+@csrf
+@method('PUT')
 
-    <div>
+<div>
 
-        <label for="name"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Nama Kelas
-        </label>
+    <label for="name"
+        class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+        Nama Kelas
+    </label>
 
-        <input
-            type="text"
-            id="name"
-            name="name"
-            value="{{ $class['name'] }}"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+    <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ $class['name'] }}"
+        class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-        <label for="grade"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Tingkat
-        </label>
+    <label for="grade"
+        class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+        Tingkat
+    </label>
 
-        <select
-            id="grade"
-            name="grade"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+    <select
+        id="grade"
+        name="grade"
+        class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-            <option {{ $class['grade']=='X' ? 'selected' : '' }}>X</option>
-            <option {{ $class['grade']=='XI' ? 'selected' : '' }}>XI</option>
-            <option {{ $class['grade']=='XII' ? 'selected' : '' }}>XII</option>
+        <option value="X" {{ $class['grade'] == 'X' ? 'selected' : '' }}>
+            X
+        </option>
 
-        </select>
+        <option value="XI" {{ $class['grade'] == 'XI' ? 'selected' : '' }}>
+            XI
+        </option>
 
-    </div>
+        <option value="XII" {{ $class['grade'] == 'XII' ? 'selected' : '' }}>
+            XII
+        </option>
 
-    <div>
+    </select>
 
-        <label for="major_id"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Jurusan
-        </label>
+</div>
 
-        <select
-            id="major_id"
-            name="major_id"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+<div>
 
-            <option>AKL</option>
-            <option selected>TKJ</option>
-            <option>BD</option>
+    <label for="major_id"
+        class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+        Jurusan
+    </label>
 
-        </select>
+    <select
+        id="major_id"
+        name="major_id"
+        class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-    </div>
+        @foreach ($majors as $major)
+            <option
+                value="{{ $major['id'] }}"
+                {{ $class['major_id'] == $major['id'] ? 'selected' : '' }}>
 
-    <div>
+                {{ $major['name'] }}
 
-        <label for="teacher_id"
-            class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-            Wali Kelas
-        </label>
+            </option>
+        @endforeach
 
-        <select
-            id="teacher_id"
-            name="teacher_id"
-            class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+    </select>
 
-            <option>Budi Santoso</option>
-            <option selected>Siti Aminah</option>
+</div>
 
-        </select>
+<div>
 
-    </div>
+    <label for="teacher_id"
+        class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+        Wali Kelas
+    </label>
 
-    <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
+    <select
+        id="teacher_id"
+        name="teacher_id"
+        class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-        <a href="{{ route('classes.index') }}"
-            class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
-            Batal
-        </a>
+        @foreach ($teachers as $teacher)
+            <option
+                value="{{ $teacher['id'] }}"
+                {{ $class['teacher_id'] == $teacher['id'] ? 'selected' : '' }}>
 
-        <button
-            type="submit"
-            class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
-            Perbarui Data
-        </button>
+                {{ $teacher['name'] }}
 
-    </div>
+            </option>
+        @endforeach
+
+    </select>
+
+</div>
+
+<div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
+
+    <a href="{{ route('classes.index') }}"
+        class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
+        Batal
+    </a>
+
+    <button
+        type="submit"
+        class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
+        Perbarui Data
+    </button>
+
+</div>
+```
 
 </form>
 

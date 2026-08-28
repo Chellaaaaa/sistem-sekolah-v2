@@ -8,7 +8,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $title = "Sitem Sekolah - Daftar Siswa";
+        $title = "Sistem Sekolah - Daftar Siswa";
         $students = [
             [
                 'id' => 1,
@@ -40,7 +40,7 @@ class StudentController extends Controller
 
     public function create()
     {
-        $title = "Sitem Sekolah - Tambah Siswa";
+        $title = "Sistem Sekolah - Tambah Siswa";
 
         return view('students.create', [
             'title' => $title
